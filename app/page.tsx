@@ -67,6 +67,17 @@ export default function JobReadyDashboard() {
     }
   ];
 
+  // Glassmorphic Watermark Component
+  const GlassmorphicWatermark = () => (
+    <div className="fixed bottom-6 right-6 z-40">
+      <div className="glassmorphic-watermark bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 shadow-2xl">
+        <div className="flex items-center gap-2">
+          <span className="text-black/80 text-xs ml-1 drop-shadow-md">©2025 by RafieGarish</span>
+        </div>
+      </div>
+    </div>
+  );
+
   // Mobile sidebar component
   const MobileSidebar = () => (
     <div className={`fixed inset-0 z-50 lg:hidden transition-transform duration-300 ${
@@ -491,7 +502,10 @@ export default function JobReadyDashboard() {
   );
 
   return (
-    <div className="flex h-screen bg-gray-50 font-sans">
+    <div className="flex h-screen bg-gray-50 font-sans relative">
+      {/* Glassmorphic Watermark */}
+      <GlassmorphicWatermark />
+
       {/* Mobile Sidebar */}
       <MobileSidebar />
 
