@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🎓 JobReady Dashboard
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16.0-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19.2-61dafb?logo=react)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1-38bdf8?logo=tailwindcss)
+<!-- ![License](https://img.shields.io/badge/license-MIT-green) -->
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+> A modern and responsive learning dashboard built with **Next.js**, **React**, and **Tailwind CSS**.  
+> JobReady Dashboard membantu pengguna meningkatkan keterampilan kerja melalui pelatihan video, simulasi wawancara, dan pembuatan CV.
+
+---
+
+## ✨ Fitur Utama
+
+- 🧭 **Navigasi Dinamis** — Sidebar interaktif dengan transisi lembut untuk Desktop & Mobile.  
+- 🎥 **Video Pelatihan** — Tampilan grid pelatihan seperti Copywriter, Microsoft Office, Canva, dan lainnya.  
+- 💼 **Simulasi Wawancara** — Sesi latihan wawancara dengan panduan langkah-langkah persiapan.  
+- 🧾 **Pembuatan CV** — Akses cepat menuju modul pembuatan CV profesional.  
+- 📅 **Jadwal & Progress** — Tampilkan jadwal pelatihan serta riwayat aktivitas pengguna.  
+- 💬 **Pesan Teman/Instruktur** — Sistem pesan sederhana di dashboard kanan.  
+- 🪶 **UI Clean & Modern** — Desain gradient dan neumorphic-inspired dengan TailwindCSS.
+
+---
+
+## 🧰 Teknologi yang Digunakan
+
+| Teknologi | Fungsi |
+|------------|---------|
+| [Next.js](https://nextjs.org/) | Framework React untuk webapp modern. |
+| [React](https://react.dev/) | Library UI utama. |
+| [Tailwind CSS](https://tailwindcss.com/) | Styling cepat dengan utility-first approach. |
+| [Lucide Icons](https://lucide.dev/) | Ikon modern dan ringan. |
+| [Next/Image](https://nextjs.org/docs/api-reference/next/image) | Optimasi gambar otomatis. |
+
+---
+
+## 🚀 Cara Menjalankan Proyek
+
+1. **Clone repository ini**
+   ```bash
+   git clone https://github.com/username/jobready-dashboard.git
+   cd jobready-dashboard
+
+2. **Instal dependensi**
+
+   ```bash
+   npm install
+   # atau
+   yarn install
+
+3. **Jalankan server pengembangan**
+
+   ```bash
+   npm run dev
+
+4. **Buka di browser**
+
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## 🖼️ Struktur Folder
+
+```
+app/
+ └── page.tsx        # Halaman utama Dashboard
+public/
+ └── copywriting.jpg  # Contoh gambar pelatihan
+README.md
+package.json
+tailwind.config.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧑‍💻 Kontributor
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Dibuat dengan ❤️ oleh **[Rafie Garish]**
+Jika kamu ingin berkontribusi, silakan buat pull request atau buka issue.
 
-## Learn More
+---
+<!-- 
+## 📄 Lisensi
 
-To learn more about Next.js, take a look at the following resources:
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+--- -->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌐 Demo (Opsional)
 
-## Deploy on Vercel
+Tambahkan link setelah deploy ke Vercel:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🔗 **Live Demo:** [https://jobready-dashboard.vercel.app](https://jobready-dashboard.vercel.app)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
