@@ -603,7 +603,7 @@ export default function JobReadyDashboard() {
             {activeMenu === 'dashboard' && renderDashboardContent()}
             {activeMenu === 'video' && renderVideoPelatihanContent()}
             {activeMenu === 'simulasi' && renderSimulasiWawancaraContent()}
-            {activeMenu === 'simulasi' && renderPembuatanCVContent()}
+            {activeMenu === 'cv' && renderPembuatanCVContent()}
 
             {/* Right Column - Sidebar */}
             <div className="space-y-4 lg:space-y-6">
