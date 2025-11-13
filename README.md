@@ -89,10 +89,8 @@ Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
 --- -->
 
-## 🌐 Demo (Opsional)
+## 🌐 Demo (Preview)
 
-Tambahkan link setelah deploy ke Vercel:
-
-🔗 **Live Demo:** [https://jobready-dashboard.vercel.app](https://jobready-dashboard.vercel.app)
+🔗 **Live Demo:** [https://jobready-dusky.vercel.app/](https://jobready-dusky.vercel.app/)
 
 ---
