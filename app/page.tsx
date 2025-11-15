@@ -72,7 +72,10 @@ export default function JobReadyDashboard() {
     <div className="fixed bottom-6 right-6 z-40">
       <div className="glassmorphic-watermark bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 shadow-2xl">
         <div className="flex items-center gap-2">
-          <span className="text-black/80 text-xs ml-1 drop-shadow-md">©2025 by RafieGarish</span>
+          <div className="flex row" >
+            <span className="text-black/80 text-xs ml-1 drop-shadow-md">©2025 by </span>
+            <a href="https://rafie-garish.vercel.app/" className="text-black/80 text-xs ml-1 drop-shadow-md underline font-bold">RafieGarish</a>
+          </div>
         </div>
       </div>
     </div>
@@ -424,79 +427,77 @@ export default function JobReadyDashboard() {
       <div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-800">Template CV</h2>
-          <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition-all font-medium text-sm lg:text-base w-full sm:w-auto">
+          {/* <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition-all font-medium text-sm lg:text-base w-full sm:w-auto">
+            See All
+          </button> */}
+        </div>
+  
+        {/* PDF Thumbnail Card - Fixed Version */}
+        <div 
+          className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+          onClick={() => window.open('/sample-cv.pdf', '_blank')}
+        >
+          {/* PDF Thumbnail Container - FIXED POSITIONING */}
+          <div className="relative aspect-[16/9] bg-gray-100 border-2 border-dashed border-gray-300">
+            {/* Fixed Image Component */}
+            <Image
+              src="/thumbnail/cv-thumbnail.png" // Make sure this path is correct relative to public folder
+              alt="CV Template Preview"
+              fill
+              className="object-cover"
+              priority // Add this for important images
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              // onError={(e) => {
+              //   // Fallback if image fails to load
+              //   e.currentTarget.parentElement!.innerHTML = `
+              //     <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+              //       <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+              //         <span className="text-red-500 font-bold text-xl">PDF</span>
+              //       </div>
+              //       <p className="text-center text-gray-600 text-sm px-2">
+              //         CV Template Preview<br/>
+              //         <span className="text-xs mt-1 block">Click to view full PDF</span>
+              //       </p>
+              //     </div>
+              //   `;
+              // }}
+            />
+            
+            {/* PDF Overlay Icon - Improved visibility */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-all">
+              <div className="hidden hover:flex flex-col items-center gap-2 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+                <div className="w-12 h-12 lg:w-16 lg:h-16 bg-red-500 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                </div>
+                <span className="text-gray-800 text-xs lg:text-sm font-medium font-sans">Lihat PDF</span>
+              </div>
+            </div>
+          </div>
+            
+          {/* Card Footer */}
+          <div className="p-4 lg:p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-bold text-gray-800 text-lg lg:text-xl">Professional CV Template</h3>
+                <p className="text-xs lg:text-sm text-gray-600 mt-1">Klik gambar di atas untuk melihat template lengkap</p>
+              </div>
+              <button 
+                className="px-3 py-1 lg:px-4 lg:py-2 bg-cyan-500 text-white rounded-lg text-xs lg:text-sm font-medium hover:bg-cyan-600 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('/sample-cv.pdf', '_blank');
+                }}
+              >
+                Lihat PDF
+              </button>
+            </div>
+          </div>
+        </div>
+          <button className="bg-cyan-500 text-white mt-4 px-4 py-2 rounded-lg hover:bg-cyan-600 transition-all font-medium text-sm lg:text-base w-full sm:w-auto">
             See All
           </button>
-        </div>
-
-        {/* CV Template Card */}
-        <div className="bg-white rounded-xl lg:rounded-2xl p-6 shadow-lg">
-          <div className="aspect-[8.5/11] bg-gray-50 rounded-lg overflow-hidden mb-4 relative">
-            <div className="p-6 space-y-4">
-              {/* CV Header */}
-              <div className="text-center border-b-2 border-gray-300 pb-4">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">Anna Katrina Marchesi</h3>
-                <div className="flex items-center justify-center gap-4 text-xs text-gray-600">
-                  <span className="flex items-center gap-1">
-                    <span>📞</span> +123-456-7890
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <span>✉️</span> hello@reallygreatsite.com
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <span>📍</span> 123 Anywhere St., Any City
-                  </span>
-                </div>
-              </div>
-
-              {/* About Section */}
-              <div>
-                <h4 className="font-bold text-gray-800 mb-2 text-sm">Tentang Saya</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">
-                  Seorang Digital Marketing Strategist yang berpengalaman dalam mengembangkan dan 
-                  mengimplementasikan strategi pemasaran digital yang efektif. Memiliki kemampuan analisis 
-                  yang kuat, serta berpengalaman dalam pengoptimalan media sosial. Berhasil memimpin 
-                  beberapa proyek pemasaran digital yang meningkatkan awareness brand dan konversi penjualan.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Template Surat Lamaran Section */}
-      <div>
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-800">Template Surat Lamaran</h2>
-        </div>
-
-        {/* Cover Letter Template Card */}
-        <div className="bg-white rounded-xl lg:rounded-2xl p-6 shadow-lg">
-          <div className="aspect-[8.5/11] bg-gray-50 rounded-lg overflow-hidden relative">
-            <div className="p-6 space-y-3 text-xs">
-              {/* Letter Header */}
-              <div className="text-right text-gray-600">
-                <p>Bogor, 10 Juli 2019</p>
-              </div>
-
-              <div className="space-y-1 text-gray-600">
-                <p className="font-semibold">Perihal: Lamaran Pekerjaan</p>
-                <p className="mt-3">Yth, Bapak / Ibu Kepala Sekolah</p>
-                <p>SMA Cahaya Rancamaya</p>
-                <p>di - Bogor</p>
-              </div>
-
-              <p className="text-gray-600">Dengan hormat,</p>
-
-              <p className="text-gray-600 leading-relaxed">
-                Berdasarkan informasi yang saya peroleh dari Bapak Kiki Novianto, salah seorang staff 
-                TU Bapak/Ibu, bahwa SMA Cahaya Rancamaya sedang membutuhkan guru Matematika. 
-                Dengan ini saya membuat permohonan lamaran pekerjaan untuk menjadi guru di sekolah 
-                yang Bapak/Ibu pimpin, adapun data pribadi saya adalah sebagai berikut :
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
