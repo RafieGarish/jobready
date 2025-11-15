@@ -435,7 +435,7 @@ export default function JobReadyDashboard() {
         {/* PDF Thumbnail Card - Fixed Version */}
         <div 
           className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-          onClick={() => window.open('/sample-cv.pdf', '_blank')}
+          onClick={() => window.open('/templates/Lamaran-ke-Instansi.pdf', '_blank')}
         >
           {/* PDF Thumbnail Container - FIXED POSITIONING */}
           <div className="relative aspect-video bg-gray-100 border-2 border-dashed border-gray-300">
