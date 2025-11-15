@@ -438,7 +438,7 @@ export default function JobReadyDashboard() {
           onClick={() => window.open('/sample-cv.pdf', '_blank')}
         >
           {/* PDF Thumbnail Container - FIXED POSITIONING */}
-          <div className="relative aspect-[16/9] bg-gray-100 border-2 border-dashed border-gray-300">
+          <div className="relative aspect-video bg-gray-100 border-2 border-dashed border-gray-300">
             {/* Fixed Image Component */}
             <Image
               src="/thumbnail/cv-thumbnail.png" // Make sure this path is correct relative to public folder
