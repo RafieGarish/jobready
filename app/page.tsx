@@ -1,8 +1,8 @@
 // app/page.tsx
 'use client';
 
-import React, { useState } from 'react';
-import { Search, Bell, Menu, Settings, User, LogOut, HelpCircle, Play, ChevronRight, X } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Search, Bell, Menu, Settings, User, LogOut, HelpCircle, Play, ChevronRight, X, XCircle } from 'lucide-react';
 import Image from 'next/image';
 
 interface TrainingModule {
@@ -38,6 +38,13 @@ interface Message {
 export default function JobReadyDashboard() {
   const [activeMenu, setActiveMenu] = useState<string>('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [isPlaying, setIsPlaying] = useState<{ [key: number]: boolean }>({});
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(null);
+
+  // Video refs
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const modalVideoRef = useRef<HTMLVideoElement>(null);
 
   const trainingModules: TrainingModule[] = [
     { id: 1, name: 'Copywriter', icon: '📝', color: 'bg-cyan-500' },
@@ -67,6 +74,50 @@ export default function JobReadyDashboard() {
     }
   ];
 
+  // Videos data
+  const videos = [
+    {
+      src: "/videos/Cara-Membuat-Portofolio-Copywriter.mp4",
+      poster: "/thumbnail-video/Cara-Membuat-Portofolio-Copywriter.png",
+      title: "Cara Membuat Portofolio Copywriter"
+    },
+    {
+      src: "/videos/Cara-Menjadi-Copywriter.mp4",
+      poster: "/thumbnail-video/Cara-Menjadi-Copywriter.png",
+      title: "Cara Menjadi Copywriter"
+    }
+  ];
+
+  // Function to handle video modal open
+  const handleVideoClick = (index: number) => {
+    setSelectedVideoIndex(index);
+    setModalOpen(true);
+    // Reset any inline playing videos
+    setIsPlaying({});
+  };
+
+  // Close modal and clean up
+  const closeModal = () => {
+    if (modalVideoRef.current) {
+      modalVideoRef.current.pause();
+      modalVideoRef.current.currentTime = 0;
+    }
+    setModalOpen(false);
+    setSelectedVideoIndex(null);
+  };
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && modalOpen) {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [modalOpen]);
+
   // Glassmorphic Watermark Component
   const GlassmorphicWatermark = () => (
     <div className="fixed bottom-6 right-6 z-40">
@@ -80,6 +131,56 @@ export default function JobReadyDashboard() {
       </div>
     </div>
   );
+
+  // Video Modal Component
+  const VideoModal = () => {
+    if (!modalOpen || selectedVideoIndex === null) return null;
+
+    const video = videos[selectedVideoIndex];
+
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm p-4">
+        <div className="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden">
+          {/* Close button */}
+          <button
+            onClick={closeModal}
+            className="absolute top-4 right-4 z-10 p-2 bg-black bg-opacity-50 rounded-full text-white hover:bg-opacity-70 transition-all"
+          >
+            <XCircle size={24} />
+          </button>
+
+          {/* Video container */}
+          <div className="relative aspect-video bg-gray-900">
+            <video
+              ref={modalVideoRef}
+              className="w-full h-full object-contain"
+              src={video.src}
+              poster={video.poster}
+              controls
+              autoPlay
+              playsInline
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          {/* Video info */}
+          <div className="p-6 bg-gradient-to-b from-gray-50 to-white">
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">{video.title}</h3>
+            <p className="text-gray-600 text-base">
+              Klik tombol tutup di pojok kanan atas atau tekan tombol Escape untuk menutup video.
+            </p>
+          </div>
+        </div>
+
+        {/* Backdrop click handler */}
+        <div 
+          className="absolute inset-0"
+          onClick={closeModal}
+        ></div>
+      </div>
+    );
+  };
 
   // Mobile sidebar component
   const MobileSidebar = () => (
@@ -96,7 +197,7 @@ export default function JobReadyDashboard() {
       <div className="relative w-64 bg-white h-full overflow-y-auto">
         <div className="p-4 border-b flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-linear-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
+            <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
               JR
             </div>
             <div>
@@ -123,7 +224,7 @@ export default function JobReadyDashboard() {
                 setSidebarOpen(false);
               }}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${
-                activeMenu === menu ? 'bg-linear-to-r from-cyan-500 to-teal-500 text-white shadow-lg' : 'text-gray-600 hover:bg-gray-100'
+                activeMenu === menu ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-lg' : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
               {menu === 'dashboard' && <Menu size={20} />}
@@ -165,7 +266,7 @@ export default function JobReadyDashboard() {
   const renderDashboardContent = () => (
     <div className="lg:col-span-2 space-y-6">
       {/* Hero Banner */}
-      <div className="bg-linear-to-r from-cyan-400 via-teal-400 to-cyan-500 rounded-3xl p-6 lg:p-8 text-white relative overflow-hidden shadow-xl">
+      <div className="bg-gradient-to-r from-cyan-400 via-teal-400 to-cyan-500 rounded-3xl p-6 lg:p-8 text-white relative overflow-hidden shadow-xl">
         <div className="relative z-10 max-w-md">
           <h2 className="text-3xl lg:text-4xl font-bold mb-2">Learn anytime,</h2>
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Grow every time</h2>
@@ -232,6 +333,19 @@ export default function JobReadyDashboard() {
               width={800}
               height={400}
               className="w-full h-full object-cover"
+              priority
+              onError={(e) => {
+                e.currentTarget.outerHTML = `
+                  <div class="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+                    <div class="text-center p-4">
+                      <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-gray-500 text-2xl">📷</span>
+                      </div>
+                      <p class="text-gray-600 text-sm">Image failed to load</p>
+                    </div>
+                  </div>
+                `;
+              }}
             />
           </div>
           <div className="p-4 lg:p-6">
@@ -271,12 +385,25 @@ export default function JobReadyDashboard() {
       {/* Pelatihan Copywriter */}
       <div>
         <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Pelatihan Copywriter</h3>
-        <div className="bg-linear-to-r from-blue-500 via-blue-600 to-cyan-500 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative h-72">
+        <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative h-72">
           <Image
             src="/copywriting.jpg"
             alt="Copywriter Training"
             fill
             className="rounded-lg object-cover"
+            priority
+            onError={(e) => {
+              e.currentTarget.parentElement!.innerHTML = `
+                <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+                  <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span class="text-blue-600 text-3xl">🎨</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Image failed to load</p>
+                  </div>
+                </div>
+              `;
+            }}
           />
           <div className="p-4 lg:p-8 flex justify-center lg:justify-end">
             <button className="bg-cyan-500 text-white px-6 lg:px-8 py-3 rounded-full font-semibold hover:bg-cyan-600 transition-all shadow-lg text-sm lg:text-base">
@@ -289,7 +416,7 @@ export default function JobReadyDashboard() {
       {/* Pelatihan Microsoft Office */}
       <div>
         <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Pelatihan Microsoft Office</h3>
-        <div className="bg-linear-to-r from-cyan-400 via-teal-400 to-cyan-500 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative h-48 lg:h-64">
+        <div className="bg-gradient-to-r from-cyan-400 via-teal-400 to-cyan-500 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative h-48 lg:h-64">
           <div className="absolute inset-0 flex items-center justify-center p-4">
             <div className="bg-white rounded-xl lg:rounded-2xl p-4 lg:p-8 w-full max-w-sm lg:w-80 shadow-2xl">
               <div className="flex items-center gap-3 lg:gap-4 mb-4">
@@ -317,7 +444,7 @@ export default function JobReadyDashboard() {
         <h2 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-4">Selamat Datang !</h2>
         
         {/* Info Box */}
-        <div className="bg-linear-to-r from-cyan-400 via-teal-400 to-blue-600 rounded-xl lg:rounded-2xl p-4 lg:p-6 text-white shadow-xl">
+        <div className="bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-600 rounded-xl lg:rounded-2xl p-4 lg:p-6 text-white shadow-xl">
           <h3 className="font-bold text-lg mb-3">Ketentuan Sebelum Memulai</h3>
           <ol className="space-y-2 text-xs lg:text-sm">
             <li className="flex gap-2">
@@ -384,30 +511,88 @@ export default function JobReadyDashboard() {
         </button>
       </div>
 
-      {/* Video Examples */}
+      {/* Video Examples with Modal Trigger - FIXED VERSION */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-        {/* Video 1 */}
-        <div className="bg-black rounded-xl lg:rounded-2xl overflow-hidden shadow-xl aspect-video relative group cursor-pointer">
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 group-hover:bg-opacity-40 transition-all">
-            <div className="w-12 h-12 lg:w-16 lg:h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Play className="text-gray-800 ml-1" size={20} fill="currentColor" />
+        {/* Video 1 - Modal Trigger - FIXED */}
+        <div 
+          className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative group cursor-pointer"
+          onClick={() => handleVideoClick(0)}
+        >
+          {/* FIXED: Proper positioned container for Image */}
+          <div className="relative aspect-video bg-gray-100">
+            <Image
+              src={videos[0].poster}
+              alt={videos[0].title}
+              fill
+              className="object-cover transition-transform group-hover:scale-105"
+              priority={selectedVideoIndex === 0}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onError={(e) => {
+                // Fallback if image fails to load
+                e.currentTarget.parentElement!.innerHTML = `
+                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+                    <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-4">
+                      <span class="text-cyan-600 font-bold text-xl">📹</span>
+                    </div>
+                    <p class="text-center text-gray-600 text-sm px-2">
+                      ${videos[0].title}<br/>
+                      <span class="text-xs mt-1 block">Thumbnail failed to load</span>
+                    </p>
+                  </div>
+                `;
+              }}
+            />
+          </div>
+          
+          {/* FIXED: Lighter overlay with better visibility */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/5 transition-all">
+            <div className="w-12 h-12 lg:w-16 lg:h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform border-2 border-white shadow-lg">
+              <Play className="text-cyan-600 ml-1" size={24} fill="currentColor" />
             </div>
+          </div>
+          
+          <div className="absolute bottom-2 left-2 right-2 bg-black/40 backdrop-blur-sm text-white text-xs lg:text-sm p-2 rounded-lg">
+            {videos[0].title}
           </div>
         </div>
 
-        {/* Video 2 */}
-        <div className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-xl aspect-video relative group cursor-pointer">
-          <Image
-            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=600&fit=crop"
-            alt="Interview Practice"
-            width={800}
-            height={600}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-20 transition-all">
-            <div className="w-12 h-12 lg:w-16 lg:h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Play className="text-gray-800 ml-1" size={20} fill="currentColor" />
+        {/* Video 2 - Modal Trigger - FIXED */}
+        <div 
+          className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative group cursor-pointer"
+          onClick={() => handleVideoClick(1)}
+        >
+          <div className="relative aspect-video bg-gray-100">
+            <Image
+              src={videos[1].poster}
+              alt={videos[1].title}
+              fill
+              className="object-cover transition-transform group-hover:scale-105"
+              priority={selectedVideoIndex === 1}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onError={(e) => {
+                e.currentTarget.parentElement!.innerHTML = `
+                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+                    <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-4">
+                      <span class="text-cyan-600 font-bold text-xl">📹</span>
+                    </div>
+                    <p class="text-center text-gray-600 text-sm px-2">
+                      ${videos[1].title}<br/>
+                      <span class="text-xs mt-1 block">Thumbnail failed to load</span>
+                    </p>
+                  </div>
+                `;
+              }}
+            />
+          </div>
+          
+          <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/5 transition-all">
+            <div className="w-12 h-12 lg:w-16 lg:h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform border-2 border-white shadow-lg">
+              <Play className="text-cyan-600 ml-1" size={24} fill="currentColor" />
             </div>
+          </div>
+          
+          <div className="absolute bottom-2 left-2 right-2 bg-black/40 backdrop-blur-sm text-white text-xs lg:text-sm p-2 rounded-lg">
+            {videos[1].title}
           </div>
         </div>
       </div>
@@ -418,6 +603,9 @@ export default function JobReadyDashboard() {
           Mulai Praktik
         </button>
       </div>
+
+      {/* Video Modal */}
+      {modalOpen && <VideoModal />}
     </div>
   );
 
@@ -427,46 +615,41 @@ export default function JobReadyDashboard() {
       <div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-800">Template CV</h2>
-          {/* <button className="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition-all font-medium text-sm lg:text-base w-full sm:w-auto">
-            See All
-          </button> */}
         </div>
   
-        {/* PDF Thumbnail Card - Fixed Version */}
+        {/* PDF Thumbnail Card - FIXED VERSION */}
         <div 
           className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
           onClick={() => window.open('/templates/Lamaran-ke-Instansi.pdf', '_blank')}
         >
-          {/* PDF Thumbnail Container - FIXED POSITIONING */}
+          {/* FIXED: Proper positioned container */}
           <div className="relative aspect-video bg-gray-100 border-2 border-dashed border-gray-300">
-            {/* Fixed Image Component */}
             <Image
-              src="/thumbnail/cv-thumbnail.png" // Make sure this path is correct relative to public folder
+              src="/thumbnail/cv-thumbnail.png"
               alt="CV Template Preview"
               fill
-              className="object-cover"
-              priority // Add this for important images
+              className="object-cover transition-transform hover:scale-105"
+              priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              // onError={(e) => {
-              //   // Fallback if image fails to load
-              //   e.currentTarget.parentElement!.innerHTML = `
-              //     <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
-              //       <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
-              //         <span className="text-red-500 font-bold text-xl">PDF</span>
-              //       </div>
-              //       <p className="text-center text-gray-600 text-sm px-2">
-              //         CV Template Preview<br/>
-              //         <span className="text-xs mt-1 block">Click to view full PDF</span>
-              //       </p>
-              //     </div>
-              //   `;
-              // }}
+              onError={(e) => {
+                e.currentTarget.parentElement!.innerHTML = `
+                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                      <span class="text-red-500 font-bold text-xl">📄</span>
+                    </div>
+                    <p class="text-center text-gray-600 text-sm px-2">
+                      CV Template Preview<br/>
+                      <span class="text-xs mt-1 block">Click to view full PDF</span>
+                    </p>
+                  </div>
+                `;
+              }}
             />
             
-            {/* PDF Overlay Icon - Improved visibility */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-all">
-              <div className="hidden hover:flex flex-col items-center gap-2 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                <div className="w-12 h-12 lg:w-16 lg:h-16 bg-red-500 rounded-full flex items-center justify-center">
+            {/* FIXED: Better overlay with clear call-to-action */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/15 hover:bg-black/10 transition-all">
+              <div className="flex flex-col items-center gap-2 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg transform hover:scale-105 transition-transform">
+                <div className="w-12 h-12 lg:w-16 lg:h-16 bg-cyan-500 rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
@@ -515,7 +698,7 @@ export default function JobReadyDashboard() {
         {/* Logo */}
         <div className="p-6 border-b">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-linear-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
+            <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
               JR
             </div>
             <div>
@@ -534,7 +717,7 @@ export default function JobReadyDashboard() {
               key={menu}
               onClick={() => setActiveMenu(menu)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${
-                activeMenu === menu ? 'bg-linear-to-r from-cyan-500 to-teal-500 text-white shadow-lg' : 'text-gray-600 hover:bg-gray-100'
+                activeMenu === menu ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-lg' : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
               {menu === 'dashboard' && <Menu size={20} />}
@@ -687,7 +870,7 @@ export default function JobReadyDashboard() {
                 </div>
                 
                 {messages.map((msg, index) => (
-                  <div key={index} className="bg-linear-to-br from-cyan-400 to-teal-500 rounded-xl p-3 lg:p-4 text-white">
+                  <div key={index} className="bg-gradient-to-br from-cyan-400 to-teal-500 rounded-xl p-3 lg:p-4 text-white">
                     <div className="flex items-start gap-2 lg:gap-3 mb-3">
                       <div className="w-8 h-8 lg:w-10 lg:h-10 bg-white rounded-full flex items-center justify-center text-xl lg:text-2xl">
                         {msg.avatar}
@@ -705,6 +888,9 @@ export default function JobReadyDashboard() {
           </div>
         </main>
       </div>
+
+      {/* Video Modal - Global so it works from any page */}
+      {modalOpen && <VideoModal />}
     </div>
   );
 }
