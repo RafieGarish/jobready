@@ -165,7 +165,7 @@ export default function JobReadyDashboard() {
           </div>
 
           {/* Video info */}
-          <div className="p-6 bg-gradient-to-b from-gray-50 to-white">
+          <div className="p-6 bg-linear-to-b from-gray-50 to-white">
             <h3 className="text-2xl font-bold text-gray-800 mb-2">{video.title}</h3>
             <p className="text-gray-600 text-base">
               Klik tombol tutup di pojok kanan atas atau tekan tombol Escape untuk menutup video.
@@ -197,7 +197,7 @@ export default function JobReadyDashboard() {
       <div className="relative w-64 bg-white h-full overflow-y-auto">
         <div className="p-4 border-b flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
+            <div className="w-10 h-10 bg-linear-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
               JR
             </div>
             <div>
@@ -224,7 +224,7 @@ export default function JobReadyDashboard() {
                 setSidebarOpen(false);
               }}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${
-                activeMenu === menu ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-lg' : 'text-gray-600 hover:bg-gray-100'
+                activeMenu === menu ? 'bg-linear-to-r from-cyan-500 to-teal-500 text-white shadow-lg' : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
               {menu === 'dashboard' && <Menu size={20} />}
@@ -266,7 +266,7 @@ export default function JobReadyDashboard() {
   const renderDashboardContent = () => (
     <div className="lg:col-span-2 space-y-6">
       {/* Hero Banner */}
-      <div className="bg-gradient-to-r from-cyan-400 via-teal-400 to-cyan-500 rounded-3xl p-6 lg:p-8 text-white relative overflow-hidden shadow-xl">
+      <div className="bg-linear-to-r from-cyan-400 via-teal-400 to-cyan-500 rounded-3xl p-6 lg:p-8 text-white relative overflow-hidden shadow-xl">
         <div className="relative z-10 max-w-md">
           <h2 className="text-3xl lg:text-4xl font-bold mb-2">Learn anytime,</h2>
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Grow every time</h2>
@@ -336,7 +336,7 @@ export default function JobReadyDashboard() {
               priority
               onError={(e) => {
                 e.currentTarget.outerHTML = `
-                  <div class="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+                  <div class="w-full h-full bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center">
                     <div class="text-center p-4">
                       <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span class="text-gray-500 text-2xl">📷</span>
@@ -385,7 +385,7 @@ export default function JobReadyDashboard() {
       {/* Pelatihan Copywriter */}
       <div>
         <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Pelatihan Copywriter</h3>
-        <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative h-72">
+        <div className="bg-linear-to-r from-blue-500 via-blue-600 to-cyan-500 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative h-72">
           <Image
             src="/copywriting.jpg"
             alt="Copywriter Training"
@@ -394,7 +394,7 @@ export default function JobReadyDashboard() {
             priority
             onError={(e) => {
               e.currentTarget.parentElement!.innerHTML = `
-                <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+                <div class="absolute inset-0 bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
                   <div class="text-center">
                     <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <span class="text-blue-600 text-3xl">🎨</span>
@@ -416,7 +416,7 @@ export default function JobReadyDashboard() {
       {/* Pelatihan Microsoft Office */}
       <div>
         <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Pelatihan Microsoft Office</h3>
-        <div className="bg-gradient-to-r from-cyan-400 via-teal-400 to-cyan-500 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative h-48 lg:h-64">
+        <div className="bg-linear-to-r from-cyan-400 via-teal-400 to-cyan-500 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl relative h-48 lg:h-64">
           <div className="absolute inset-0 flex items-center justify-center p-4">
             <div className="bg-white rounded-xl lg:rounded-2xl p-4 lg:p-8 w-full max-w-sm lg:w-80 shadow-2xl">
               <div className="flex items-center gap-3 lg:gap-4 mb-4">
@@ -444,7 +444,7 @@ export default function JobReadyDashboard() {
         <h2 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-4">Selamat Datang !</h2>
         
         {/* Info Box */}
-        <div className="bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-600 rounded-xl lg:rounded-2xl p-4 lg:p-6 text-white shadow-xl">
+        <div className="bg-linear-to-r from-cyan-400 via-teal-400 to-blue-600 rounded-xl lg:rounded-2xl p-4 lg:p-6 text-white shadow-xl">
           <h3 className="font-bold text-lg mb-3">Ketentuan Sebelum Memulai</h3>
           <ol className="space-y-2 text-xs lg:text-sm">
             <li className="flex gap-2">
@@ -530,7 +530,7 @@ export default function JobReadyDashboard() {
               onError={(e) => {
                 // Fallback if image fails to load
                 e.currentTarget.parentElement!.innerHTML = `
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 p-4">
                     <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-4">
                       <span class="text-cyan-600 font-bold text-xl">📹</span>
                     </div>
@@ -571,7 +571,7 @@ export default function JobReadyDashboard() {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               onError={(e) => {
                 e.currentTarget.parentElement!.innerHTML = `
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 p-4">
                     <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-4">
                       <span class="text-cyan-600 font-bold text-xl">📹</span>
                     </div>
@@ -633,7 +633,7 @@ export default function JobReadyDashboard() {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               onError={(e) => {
                 e.currentTarget.parentElement!.innerHTML = `
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 p-4">
                     <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
                       <span class="text-red-500 font-bold text-xl">📄</span>
                     </div>
@@ -698,7 +698,7 @@ export default function JobReadyDashboard() {
         {/* Logo */}
         <div className="p-6 border-b">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
+            <div className="w-10 h-10 bg-linear-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
               JR
             </div>
             <div>
@@ -717,7 +717,7 @@ export default function JobReadyDashboard() {
               key={menu}
               onClick={() => setActiveMenu(menu)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${
-                activeMenu === menu ? 'bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-lg' : 'text-gray-600 hover:bg-gray-100'
+                activeMenu === menu ? 'bg-linear-to-r from-cyan-500 to-teal-500 text-white shadow-lg' : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
               {menu === 'dashboard' && <Menu size={20} />}
@@ -870,7 +870,7 @@ export default function JobReadyDashboard() {
                 </div>
                 
                 {messages.map((msg, index) => (
-                  <div key={index} className="bg-gradient-to-br from-cyan-400 to-teal-500 rounded-xl p-3 lg:p-4 text-white">
+                  <div key={index} className="bg-linear-to-br from-cyan-400 to-teal-500 rounded-xl p-3 lg:p-4 text-white">
                     <div className="flex items-start gap-2 lg:gap-3 mb-3">
                       <div className="w-8 h-8 lg:w-10 lg:h-10 bg-white rounded-full flex items-center justify-center text-xl lg:text-2xl">
                         {msg.avatar}
