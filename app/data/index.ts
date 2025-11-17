@@ -30,12 +30,12 @@ export const messages: Message[] = [
 
 export const videos: Video[] = [
   {
-    src: "/videos/Cara-Membuat-Portofolio-Copywriter.mp4",
+    src: "https://ik.imagekit.io/iz7xcurfw/github/jobready/Cara-Membuat-Portofolio-Copywriter.mp4",
     poster: "/thumbnail-video/Cara-Membuat-Portofolio-Copywriter.png",
     title: "Cara Membuat Portofolio Copywriter"
   },
   {
-    src: "/videos/Cara-Menjadi-Copywriter.mp4",
+    src: "https://ik.imagekit.io/iz7xcurfw/github/jobready/Cara-Menjadi-Copywriter.mp4?tr=orig",
     poster: "/thumbnail-video/Cara-Menjadi-Copywriter.png",
     title: "Cara Menjadi Copywriter"
   }
