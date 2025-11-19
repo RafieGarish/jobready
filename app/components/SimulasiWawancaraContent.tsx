@@ -1,3 +1,4 @@
+// File: SimulasiWawancaraContent.tsx (updated)
 import React from 'react';
 import Image from 'next/image';
 import { Play, Search } from 'lucide-react';
@@ -5,9 +6,10 @@ import { videos } from '../data';
 
 interface SimulasiWawancaraContentProps {
   onVideoClick: (index: number) => void;
+  onStartPractice: () => void; // Add this prop
 }
 
-export default function SimulasiWawancaraContent({ onVideoClick }: SimulasiWawancaraContentProps) {
+export default function SimulasiWawancaraContent({ onVideoClick, onStartPractice }: SimulasiWawancaraContentProps) {
   return (
     <div className="lg:col-span-2 space-y-6">
       <div>
@@ -124,7 +126,10 @@ export default function SimulasiWawancaraContent({ onVideoClick }: SimulasiWawan
       </div>
 
       <div className="flex justify-center pt-4">
-        <button className="bg-cyan-500 text-white px-8 lg:px-12 py-3 lg:py-4 rounded-full font-bold text-base lg:text-lg hover:bg-cyan-600 transition-all shadow-lg hover:shadow-xl w-full sm:w-auto">
+        <button 
+          onClick={onStartPractice}
+          className="bg-cyan-500 text-white px-8 lg:px-12 py-3 lg:py-4 rounded-full font-bold text-base lg:text-lg hover:bg-cyan-600 transition-all shadow-lg hover:shadow-xl w-full sm:w-auto"
+        >
           Mulai Praktik
         </button>
       </div>

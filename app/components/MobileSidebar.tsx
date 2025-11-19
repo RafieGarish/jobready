@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, Menu, Play, User, Settings, LogOut, HelpCircle } from 'lucide-react';
+import { useAuth } from '../context/AuthContext'
 
 interface MobileSidebarProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ export default function MobileSidebar({
   activeMenu, 
   onMenuClick 
 }: MobileSidebarProps) {
+const { logout } = useAuth(); // Add this line
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Menu },
     { id: 'video', label: 'Video Pelatihan', icon: Play },
@@ -27,7 +29,7 @@ export default function MobileSidebar({
         </svg>
       )
     },
-    { id: 'settings', label: 'Settings', icon: Settings }
+    // { id: 'settings', label: 'Settings', icon: Settings }
   ];
 
   return (
@@ -83,10 +85,13 @@ export default function MobileSidebar({
             <User size={20} />
             <span className="font-medium">My Account</span>
           </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg mb-2 transition-colors">
-            <LogOut size={20} />
-            <span className="font-medium">Sign Out</span>
-          </button>
+<button 
+  onClick={logout}
+  className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg mb-2 transition-colors"
+>
+  <LogOut size={20} />
+  <span className="font-medium">Sign Out</span>
+</button>
           <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
             <HelpCircle size={20} />
             <span className="font-medium">Help</span>

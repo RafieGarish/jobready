@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, Play, User, Settings, LogOut, HelpCircle } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 interface DesktopSidebarProps {
   activeMenu: string;
@@ -7,6 +8,7 @@ interface DesktopSidebarProps {
 }
 
 export default function DesktopSidebar({ activeMenu, onMenuClick }: DesktopSidebarProps) {
+  const { logout } = useAuth();
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Menu },
     { id: 'video', label: 'Video Pelatihan', icon: Play },
@@ -20,7 +22,7 @@ export default function DesktopSidebar({ activeMenu, onMenuClick }: DesktopSideb
         </svg>
       )
     },
-    { id: 'settings', label: 'Settings', icon: Settings }
+    // { id: 'settings', label: 'Settings', icon: Settings }
   ];
 
   return (
@@ -59,7 +61,10 @@ export default function DesktopSidebar({ activeMenu, onMenuClick }: DesktopSideb
           <User size={20} />
           <span className="font-medium">My Account</span>
         </button>
-        <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg mb-2 transition-colors">
+        <button 
+          onClick={logout}
+          className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg mb-2 transition-colors"
+        >
           <LogOut size={20} />
           <span className="font-medium">Sign Out</span>
         </button>
