@@ -226,7 +226,7 @@ export default function GlobalSearchContent({ searchQuery, onMenuClick, onVideoC
               <div className="p-6">
                 <div className="flex items-start gap-4">
                   {/* Icon/Image */}
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     {result.image ? (
                       <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-100">
                         <Image
@@ -297,7 +297,7 @@ export default function GlobalSearchContent({ searchQuery, onMenuClick, onVideoC
                   </div>
 
                   {/* Action Arrow */}
-                  <div className="flex-shrink-0 transform group-hover:translate-x-1 transition-transform">
+                  <div className="shrink-0 transform group-hover:translate-x-1 transition-transform">
                     <ArrowRight size={20} className="text-gray-400 group-hover:text-cyan-500" />
                   </div>
                 </div>
