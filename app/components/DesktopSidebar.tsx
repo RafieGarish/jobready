@@ -1,6 +1,8 @@
+// File: DesktopSidebar.tsx
 import React from 'react';
 import { Menu, Play, User, Settings, LogOut, HelpCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import Image from 'next/image';
 
 interface DesktopSidebarProps {
   activeMenu: string;
@@ -22,21 +24,41 @@ export default function DesktopSidebar({ activeMenu, onMenuClick }: DesktopSideb
         </svg>
       )
     },
-    // { id: 'settings', label: 'Settings', icon: Settings }
   ];
 
   return (
     <div className="hidden lg:flex w-64 bg-white shadow-lg flex-col">
       <div className="p-6 border-b">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-linear-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
-            JR
-          </div>
-          <div>
-            <h1 className="text-xl font-bold text-gray-800">
-              Job<span className="text-cyan-500">Ready</span>
-            </h1>
-            <p className="text-xs text-gray-500">Pacitan</p>
+        <div className="flex items-center justify-center">
+          {/* Logo Image */}
+          <div className="shrink-0">
+            <Image
+              src="/logo.jpg" // Make sure to put your logo.png in the public folder
+              alt="JobReady Pacitan"
+              width={180} // Adjusted for desktop sidebar
+              height={54} // Adjusted for desktop sidebar
+              // className="h-12 w-auto"
+              className="h-auto w-auto"
+              priority
+              onError={(e) => {
+                // Fallback to text logo if image fails to load
+                e.currentTarget.style.display = 'none';
+                const fallback = document.getElementById('logo-fallback-desktop');
+                if (fallback) fallback.style.display = 'flex';
+              }}
+            />
+            {/* Fallback text logo */}
+            <div id="logo-fallback-desktop" className="hidden items-center gap-2">
+              <div className="w-10 h-10 bg-linear-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
+                JR
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gray-800">
+                  Job<span className="text-cyan-500">Ready</span>
+                </h1>
+                <p className="text-xs text-gray-500">Pacitan</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -57,10 +79,19 @@ export default function DesktopSidebar({ activeMenu, onMenuClick }: DesktopSideb
       </nav>
 
       <div className="p-4 border-t">
-        <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg mb-2 transition-colors">
+        {/* My Account Button */}
+        <button 
+          onClick={() => onMenuClick('account')}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${
+            activeMenu === 'account' 
+              ? 'bg-linear-to-r from-cyan-500 to-teal-500 text-white shadow-lg' 
+              : 'text-gray-600 hover:bg-gray-100'
+          }`}
+        >
           <User size={20} />
           <span className="font-medium">My Account</span>
         </button>
+        
         <button 
           onClick={logout}
           className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg mb-2 transition-colors"

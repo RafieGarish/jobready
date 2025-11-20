@@ -1,11 +1,48 @@
-import React from 'react';
-import { Search, Bell, Menu } from 'lucide-react';
+// File: Header.tsx (updated with proper event handling)
+import React, { useState, useEffect } from 'react';
+import { Search, Bell, Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   onMenuClick: () => void;
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
+  onClearSearch: () => void;
 }
 
-export default function Header({ onMenuClick }: HeaderProps) {
+export default function Header({ 
+  onMenuClick, 
+  searchQuery, 
+  onSearchChange, 
+  onClearSearch 
+}: HeaderProps) {
+  const [localSearch, setLocalSearch] = useState(searchQuery);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  // Sync local search with parent search query
+  useEffect(() => {
+    setLocalSearch(searchQuery);
+  }, [searchQuery]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    console.log('Header input changed:', value);
+    setLocalSearch(value);
+    onSearchChange(value);
+  };
+
+  const handleClearSearch = () => {
+    console.log('Clearing search from header');
+    setLocalSearch('');
+    onClearSearch();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      handleClearSearch();
+      setIsSearchFocused(false);
+    }
+  };
+
   return (
     <header className="bg-white shadow-sm p-4 flex items-center justify-between">
       <div className="flex items-center gap-4 flex-1 max-w-xl">
@@ -15,12 +52,36 @@ export default function Header({ onMenuClick }: HeaderProps) {
         >
           <Menu className="text-gray-600" size={20} />
         </button>
-        <Search className="text-gray-400 hidden sm:block" size={20} />
-        <input
-          type="text"
-          placeholder="Search Here"
-          className="flex-1 outline-none text-gray-600 text-sm lg:text-base"
-        />
+        
+        {/* Search Container */}
+        <div className={`flex-1 relative transition-all duration-200 ${
+          isSearchFocused ? 'ring-2 ring-cyan-500 rounded-lg' : ''
+        }`}>
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Search className="text-gray-400" size={20} />
+          </div>
+          
+          <input
+            type="text"
+            value={localSearch}
+            onChange={handleSearchChange}
+            onFocus={() => setIsSearchFocused(true)}
+            onBlur={() => setIsSearchFocused(false)}
+            onKeyDown={handleKeyDown}
+            placeholder="Cari pelatihan, video, atau modul..."
+            className="w-full pl-10 pr-10 py-2.5 bg-gray-50 border-0 rounded-lg text-gray-600 text-sm lg:text-base focus:outline-none focus:ring-0"
+          />
+          
+          {/* Clear Search Button */}
+          {localSearch && (
+            <button
+              onClick={handleClearSearch}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center hover:bg-gray-100 rounded-r-lg transition-colors"
+            >
+              <X className="text-gray-400 hover:text-gray-600" size={18} />
+            </button>
+          )}
+        </div>
       </div>
       
       <div className="flex items-center gap-2 lg:gap-4">

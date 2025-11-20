@@ -63,7 +63,7 @@ export default function VideoCallScreen({ onEndCall, onBack }: VideoCallScreenPr
     const initializeRemoteVideo = () => {
       if (remoteVideoRef.current) {
         // Using a dummy interview video
-        remoteVideoRef.current.src = '/videos/Cara-Menjadi-Copywriter.mp4';
+        remoteVideoRef.current.src = '/videos/vc-dummy.mp4';
         remoteVideoRef.current.loop = true;
         remoteVideoRef.current.play().catch(error => {
           console.error('Error playing remote video:', error);

@@ -1,4 +1,4 @@
-// File: SimulasiWawancaraContent.tsx (updated)
+// File: SimulasiWawancaraContent.tsx
 import React from 'react';
 import Image from 'next/image';
 import { Play, Search } from 'lucide-react';
@@ -6,10 +6,13 @@ import { videos } from '../data';
 
 interface SimulasiWawancaraContentProps {
   onVideoClick: (index: number) => void;
-  onStartPractice: () => void; // Add this prop
+  onStartPractice: () => void;
 }
 
-export default function SimulasiWawancaraContent({ onVideoClick, onStartPractice }: SimulasiWawancaraContentProps) {
+export default function SimulasiWawancaraContent({ 
+  onVideoClick, 
+  onStartPractice
+}: SimulasiWawancaraContentProps) {
   return (
     <div className="lg:col-span-2 space-y-6">
       <div>
@@ -74,7 +77,7 @@ export default function SimulasiWawancaraContent({ onVideoClick, onStartPractice
         <input
           type="text"
           placeholder="Search"
-          className="w-full px-4 lg:px-6 py-3 rounded-full border-2 border-gray-300 focus:border-cyan-500 focus:outline-none pr-12 text-sm lg:text-base"
+          className="w-full px-4 lg:px-6 py-3 text-black rounded-full border-2 border-gray-300 focus:border-cyan-500 focus:outline-none pr-12 text-sm lg:text-base"
         />
         <button className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 hover:bg-gray-100">
           <Search className="text-gray-400" size={20} />

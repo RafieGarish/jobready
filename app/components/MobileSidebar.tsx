@@ -1,6 +1,8 @@
+// File: MobileSidebar.tsx
 import React from 'react';
 import { X, Menu, Play, User, Settings, LogOut, HelpCircle } from 'lucide-react';
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext';
+import Image from 'next/image';
 
 interface MobileSidebarProps {
   isOpen: boolean;
@@ -15,7 +17,8 @@ export default function MobileSidebar({
   activeMenu, 
   onMenuClick 
 }: MobileSidebarProps) {
-const { logout } = useAuth(); // Add this line
+  const { logout } = useAuth();
+
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Menu },
     { id: 'video', label: 'Video Pelatihan', icon: Play },
@@ -29,7 +32,6 @@ const { logout } = useAuth(); // Add this line
         </svg>
       )
     },
-    // { id: 'settings', label: 'Settings', icon: Settings }
   ];
 
   return (
@@ -43,15 +45,35 @@ const { logout } = useAuth(); // Add this line
       
       <div className="relative w-64 bg-white h-full overflow-y-auto">
         <div className="p-4 border-b flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-linear-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
-              JR
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-800">
-                Job<span className="text-cyan-500">Ready</span>
-              </h1>
-              <p className="text-xs text-gray-500">Pacitan</p>
+          <div className="flex items-center">
+            {/* Logo Image */}
+            <div className="shrink-0">
+              <Image
+                src="/logo.jpg" // Make sure to put your logo.png in the public folder
+                alt="JobReady Pacitan"
+                width={140} // Adjusted for mobile sidebar
+                height={42} // Adjusted for mobile sidebar
+                className="h-8 w-auto" // This will maintain aspect ratio
+                priority
+                onError={(e) => {
+                  // Fallback to text logo if image fails to load
+                  e.currentTarget.style.display = 'none';
+                  const fallback = document.getElementById('logo-fallback-mobile');
+                  if (fallback) fallback.style.display = 'flex';
+                }}
+              />
+              {/* Fallback text logo */}
+              <div id="logo-fallback-mobile" className="hidden items-center gap-2">
+                <div className="w-8 h-8 bg-linear-to-br from-cyan-400 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  JR
+                </div>
+                <div>
+                  <h1 className="text-lg font-bold text-gray-800">
+                    Job<span className="text-cyan-500">Ready</span>
+                  </h1>
+                  <p className="text-xs text-gray-500">Pacitan</p>
+                </div>
+              </div>
             </div>
           </div>
           <button 
@@ -81,17 +103,29 @@ const { logout } = useAuth(); // Add this line
         </nav>
 
         <div className="p-4 border-t">
-          <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg mb-2 transition-colors">
+          {/* My Account Button */}
+          <button 
+            onClick={() => {
+              onMenuClick('account');
+              onClose();
+            }}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-all ${
+              activeMenu === 'account' 
+                ? 'bg-linear-to-r from-cyan-500 to-teal-500 text-white shadow-lg' 
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
             <User size={20} />
             <span className="font-medium">My Account</span>
           </button>
-<button 
-  onClick={logout}
-  className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg mb-2 transition-colors"
->
-  <LogOut size={20} />
-  <span className="font-medium">Sign Out</span>
-</button>
+          
+          <button 
+            onClick={logout}
+            className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg mb-2 transition-colors"
+          >
+            <LogOut size={20} />
+            <span className="font-medium">Sign Out</span>
+          </button>
           <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
             <HelpCircle size={20} />
             <span className="font-medium">Help</span>
