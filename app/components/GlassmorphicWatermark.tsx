@@ -5,7 +5,7 @@ export default function GlassmorphicWatermark() {
         <div className="flex items-center gap-2">
           <div className="flex row" >
             <span className="text-black/80 text-xs ml-1 drop-shadow-md">©2025 by </span>
-            <a href="https://rafie-garish.vercel.app/" className="text-black/80 text-xs ml-1 drop-shadow-md underline font-bold">RafieGarish</a>
+            <a href="https://rafie-garish.vercel.app/" className="text-blue-500 text-xs ml-1 drop-shadow-md underline font-bold">RafieGarish</a>
           </div>
         </div>
       </div>

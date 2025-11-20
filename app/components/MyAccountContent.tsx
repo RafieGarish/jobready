@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { User, Mail, Phone, MapPin, Calendar, Edit, Save, Camera, Lock, Bell, Shield, Globe, CreditCard } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Calendar, Edit, Save, Camera, Bell, Shield, CreditCard } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export default function MyAccountContent() {
@@ -160,7 +160,7 @@ export default function MyAccountContent() {
                             type="text"
                             value={userData.name}
                             onChange={(e) => handleInputChange('name', e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                            className="w-full px-3 py-2 border border-gray-300 text-gray-400 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                           />
                         </div>
                         <div>
@@ -169,7 +169,7 @@ export default function MyAccountContent() {
                             value={userData.bio}
                             onChange={(e) => handleInputChange('bio', e.target.value)}
                             rows={3}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                            className="w-full px-3 py-2 border border-gray-300 text-gray-400 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                           />
                         </div>
                       </div>
@@ -200,7 +200,7 @@ export default function MyAccountContent() {
                           type="email"
                           value={userData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-300 text-gray-400 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                         />
                       ) : (
                         <p className="text-gray-900">{userData.email}</p>
@@ -217,7 +217,7 @@ export default function MyAccountContent() {
                           type="tel"
                           value={userData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-300 text-gray-400 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                         />
                       ) : (
                         <p className="text-gray-900">{userData.phone}</p>
@@ -234,7 +234,7 @@ export default function MyAccountContent() {
                           type="text"
                           value={userData.location}
                           onChange={(e) => handleInputChange('location', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-300 text-gray-400 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                         />
                       ) : (
                         <p className="text-gray-900">{userData.location}</p>
@@ -345,7 +345,7 @@ export default function MyAccountContent() {
                     <select
                       value={preferences.language}
                       onChange={(e) => handlePreferenceChange('language', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                      className="w-full px-3 py-2 border text-gray-500 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                     >
                       <option value="indonesia">Bahasa Indonesia</option>
                       <option value="english">English</option>
@@ -357,7 +357,7 @@ export default function MyAccountContent() {
                     <select
                       value={preferences.theme}
                       onChange={(e) => handlePreferenceChange('theme', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                      className="w-full px-3 py-2 border text-gray-500 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                     >
                       <option value="light">Light</option>
                       <option value="dark">Dark</option>
@@ -378,7 +378,7 @@ export default function MyAccountContent() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Password Saat Ini</label>
                     <input
                       type="password"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                      className="w-full px-3 py-2 border text-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                       placeholder="Masukkan password saat ini"
                     />
                   </div>
@@ -386,7 +386,7 @@ export default function MyAccountContent() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Password Baru</label>
                     <input
                       type="password"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                      className="w-full px-3 py-2 border text-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                       placeholder="Masukkan password baru"
                     />
                   </div>
@@ -394,7 +394,7 @@ export default function MyAccountContent() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Password Baru</label>
                     <input
                       type="password"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
+                      className="w-full px-3 py-2 border text-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                       placeholder="Konfirmasi password baru"
                     />
                   </div>
@@ -409,7 +409,7 @@ export default function MyAccountContent() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <p className="font-medium">Chrome - Windows</p>
+                      <p className="font-medium text-gray-700">Chrome - Windows</p>
                       <p className="text-sm text-gray-600">Aktif sekarang • Pacitan, Indonesia</p>
                     </div>
                     <button className="text-red-500 hover:text-red-700 text-sm font-medium">
@@ -418,7 +418,7 @@ export default function MyAccountContent() {
                   </div>
                   <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <p className="font-medium">Firefox - Android</p>
+                      <p className="font-medium text-gray-700">Firefox - Android</p>
                       <p className="text-sm text-gray-600">2 hari yang lalu • Surabaya, Indonesia</p>
                     </div>
                     <button className="text-red-500 hover:text-red-700 text-sm font-medium">
@@ -450,19 +450,19 @@ export default function MyAccountContent() {
                 <div className="mt-6 space-y-4">
                   <h5 className="font-semibold text-gray-800">Fitur yang didapat:</h5>
                   <ul className="space-y-2">
-                    <li className="flex items-center gap-2">
+                    <li className="flex items-center gap-2 text-gray-600">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       <span>Video pelatihan tidak terbatas</span>
                     </li>
-                    <li className="flex items-center gap-2">
+                    <li className="flex items-center gap-2 text-gray-600">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       <span>Simulasi wawancara AI</span>
                     </li>
-                    <li className="flex items-center gap-2">
+                    <li className="flex items-center gap-2 text-gray-600">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       <span>Template CV profesional</span>
                     </li>
-                    <li className="flex items-center gap-2">
+                    <li className="flex items-center gap-2 text-gray-600">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       <span>Sertifikat kelulusan</span>
                     </li>
@@ -475,21 +475,21 @@ export default function MyAccountContent() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 border-b">
                     <div>
-                      <p className="font-medium">Pelatihan Copywriter</p>
+                      <p className="font-medium text-gray-700">Pelatihan Copywriter</p>
                       <p className="text-sm text-gray-600">15 Agustus 2024 • Selesai</p>
                     </div>
                     <span className="text-green-500 font-medium">+100 Poin</span>
                   </div>
                   <div className="flex items-center justify-between p-3 border-b">
                     <div>
-                      <p className="font-medium">Simulasi Wawancara</p>
+                      <p className="font-medium text-gray-700">Simulasi Wawancara</p>
                       <p className="text-sm text-gray-600">10 Agustus 2024 • 85%</p>
                     </div>
                     <span className="text-blue-500 font-medium">+85 Poin</span>
                   </div>
                   <div className="flex items-center justify-between p-3 border-b">
                     <div>
-                      <p className="font-medium">Pembuatan CV</p>
+                      <p className="font-medium text-gray-700">Pembuatan CV</p>
                       <p className="text-sm text-gray-600">5 Agustus 2024 • Selesai</p>
                     </div>
                     <span className="text-green-500 font-medium">+50 Poin</span>
