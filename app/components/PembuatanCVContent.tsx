@@ -14,7 +14,7 @@ export default function PembuatanCVContent() {
           className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
           onClick={() => window.open('/templates/Lamaran-ke-Instansi.pdf', '_blank')}
         >
-          <div className="relative aspect-video bg-gray-100 border-2 border-dashed border-gray-300">
+          <div className="relative h-52 bg-gray-100 border-2 border-dashed border-gray-300">
             <Image
               src="/thumbnail/cv-thumbnail.png"
               alt="CV Template Preview"

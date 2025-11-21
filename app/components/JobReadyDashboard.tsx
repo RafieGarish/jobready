@@ -98,7 +98,7 @@ export default function JobReadyDashboard() {
 
   return (
     <div className="flex h-screen bg-gray-50 font-sans relative">
-      <GlassmorphicWatermark />
+      {/* <GlassmorphicWatermark /> */}
 
       <MobileSidebar
         isOpen={sidebarOpen}
